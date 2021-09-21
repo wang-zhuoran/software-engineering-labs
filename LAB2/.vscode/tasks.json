@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "task g++",
+			"command": "D:\\mingw64\\bin\\g++.exe",
+			"args": [
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-fexec-charset=GBK"//解决中文乱码
+			],
+			"options": {
+				"cwd": "D:\\mingw64\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "编译器: D:\\mingw64\\bin\\g++.exe"
+		}
+	]
+}
