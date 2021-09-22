@@ -42,6 +42,39 @@ the number of "case" corresponding to each group
 */
 void countSwitchAndCase(vector<string> &code)
 {
+	int switch_num = 0;
+	int case_temp_num = 0;
+	vector<int> case_num;
+	for (int i = 0; i < code.size(); i++)
+	{
+		if (code[i] == "switch")
+		{
+			switch_num++;
+			case_temp_num = 0;
+			for (int j = i + 1; j < code.size(); j++)
+			{
+				if (code[j] == "switch")
+				{
+					break;
+				}
+				else
+				{
+					if (code[j] == "case")
+					{
+						case_temp_num++;
+					}
+				}
+			}
+			case_num.push_back(case_temp_num);
+		}
+	}
+	cout << "switch num: " << switch_num << endl;
+	cout << "case num: ";
+	for (int i = 0; i < case_num.size(); i++)
+	{
+		cout << case_num[i] << " ";
+	}
+	puts("");
 }
 
 void read(string &path, int &level)
