@@ -96,16 +96,11 @@ deque<string> extractIfElse(vector<string> &code)
 	return if_else;
 }
 
-/*
-完美处理多层嵌套！
-Perfectly handling multiple nesting
-*/
-int countIfElse(vector<string> &code)
+vector<key_level_pair> extractKeyLevel(vector<string> &code)
 {
-	int num = 0;
-	vector<key_level_pair> key_level_vec;
 	int flag = 1;
 	deque<string> if_else = extractIfElse(code);
+	vector<key_level_pair> key_level_vec;
 	for (int i = 0; i < if_else.size(); i++)
 	{
 		if (if_else[i] == "if" && if_else[i + 1] == "{" && if_else[i - 1] != "else" && if_else[i + 2] != "}")
@@ -146,7 +141,18 @@ int countIfElse(vector<string> &code)
 			flag++;
 		}
 	}
+	return key_level_vec;
+}
 
+/*
+完美处理多层嵌套！
+Perfectly handling multiple nesting
+*/
+int countIfElse(vector<string> &code)
+{
+	int num = 0;
+	vector<key_level_pair> key_level_vec;
+	key_level_vec = extractKeyLevel(code);
 	for (int i = 0; i < key_level_vec.size(); i++)
 	{
 		if (key_level_vec[i].first == "if")
@@ -166,16 +172,17 @@ int countIfElse(vector<string> &code)
 		}
 	}
 
-	for (int i = 0; i < key_level_vec.size(); i++)
-	{
-		cout << key_level_vec[i].first << " " << key_level_vec[i].second << endl;
-	}
+	// for (int i = 0; i < key_level_vec.size(); i++)
+	// {
+	// 	cout << key_level_vec[i].first << " " << key_level_vec[i].second << endl;
+	// }
 
 	return num;
 }
 
 /*
 Print the number of if-else statement.
+一个无法处理嵌套的垃圾解法
 */
 // int countIfElse(vector<string> &code)
 // {
@@ -213,10 +220,45 @@ Print the number of if-else statement.
 // 	return num;
 // }
 
+int countIfElseIfElse(vector<string> &code)
+{
+	int num = 0;
+	vector<key_level_pair> key_level_vec = extractKeyLevel(code);
+	bool has_else_if = false;
+	for (int i = 0; i < key_level_vec.size(); i++)
+	{
+		if (key_level_vec[i].first == "if")
+		{
+			for (int j = i + 1; j < key_level_vec.size(); j++)
+			{
+				if (key_level_vec[j].first == "if" && key_level_vec[i].second == key_level_vec[j].second)
+				{
+					break;
+				}
+				if (key_level_vec[j].first == "else if" && key_level_vec[i].second == key_level_vec[j].second)
+				{
+					has_else_if = true;
+				}
+				if (key_level_vec[j].first == "else" && key_level_vec[i].second == key_level_vec[j].second)
+				{
+					if (has_else_if)
+					{
+						num++;
+					}
+				}
+			}
+			has_else_if = false;
+		}
+	}
+	return num;
+}
+
 void read(string &path, int &level)
 {
-	// cout << "Please type in the path if code file: ";
-	// cin >> path;
+	cout << "Please type in the path if code file: ";
+	puts("");
+	cout << "The path should be written like: D:\\\\Study\\\\test.txt" << endl;
+	cin >> path;
 	cout << "Please select the level of completion: ";
 	cin >> level;
 	if (level <= 0 || level > 4)
@@ -269,6 +311,7 @@ void solve(vector<string> &code, int &level)
 		break;
 	case 4:
 		cout << "Case 4" << endl;
+		cout << "if-elseif-else num: " << countIfElseIfElse(code) << endl;
 		break;
 	default:
 		break;
@@ -277,7 +320,7 @@ void solve(vector<string> &code, int &level)
 
 int main()
 {
-	string path = "D:\\Study\\third_year\\software_engineering\\local_repo\\software-engineering-labs\\LAB2\\C_test_file.txt";
+	string path;
 	vector<string> code;
 	int level;
 	read(path, level);
