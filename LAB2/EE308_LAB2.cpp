@@ -3,8 +3,11 @@
 #include <stack>
 #include <vector>
 #include <set>
+#include <deque>
 #include <algorithm>
 using namespace std;
+
+typedef pair<string, int> key_level_pair;
 
 const set<string> keywords = {"auto", "break", "case", "char", "const",
 							  "continue", "default", "do", "double", "else",
@@ -16,7 +19,7 @@ const set<string> keywords = {"auto", "break", "case", "char", "const",
 
 bool isNotLetter(char x)
 {
-	return !((x >= 65) && (x <= 90) || (x >= 97) && (x <= 122));
+	return !((x >= 65) && (x <= 90) || (x >= 97) && (x <= 122) || (x == '{') || (x == '}'));
 }
 
 /* 
@@ -77,6 +80,139 @@ void countSwitchAndCase(vector<string> &code)
 	puts("");
 }
 
+deque<string> extractIfElse(vector<string> &code)
+{
+	deque<string> if_else;
+	for (int i = 0; i < code.size(); i++)
+	{
+		bool flag = (code[i] == "if" || code[i] == "else" || code[i] == "{" || code[i] == "}");
+		if (flag)
+		{
+			if_else.push_back(code[i]);
+		}
+	}
+	//if_else.pop_back();
+	//if_else.pop_front();
+	return if_else;
+}
+
+/*
+完美处理多层嵌套！
+Perfectly handling multiple nesting
+*/
+int countIfElse(vector<string> &code)
+{
+	int num = 0;
+	vector<key_level_pair> key_level_vec;
+	int flag = 1;
+	deque<string> if_else = extractIfElse(code);
+	for (int i = 0; i < if_else.size(); i++)
+	{
+		if (if_else[i] == "if" && if_else[i + 1] == "{" && if_else[i - 1] != "else" && if_else[i + 2] != "}")
+		{
+			key_level_pair temp = {"if", flag};
+			key_level_vec.push_back(temp);
+			flag++;
+			// int j = i;
+			// while (!(if_else[j]  == "else" && if_else[j + 3] != "}") )
+			// {
+
+			// }
+		}
+		if (if_else[i] == "if" && if_else[i + 1] == "{" && if_else[i - 1] != "else" && if_else[i + 2] == "}")
+		{
+			key_level_pair temp = {"if", flag};
+			key_level_vec.push_back(temp);
+		}
+		if (if_else[i] == "else" && if_else[i + 3] != "}" && if_else[i + 1] != "if" && if_else[i + 1] == "{")
+		{
+			key_level_pair temp = {"else", flag};
+			key_level_vec.push_back(temp);
+			flag++;
+		}
+		if (if_else[i] == "else" && if_else[i + 3] == "}" && if_else[i + 1] != "if")
+		{
+			key_level_pair temp = {"else", flag};
+			key_level_vec.push_back(temp);
+			flag -= 1;
+		}
+		if (if_else[i] == "else" && if_else[i + 1] == "if" && if_else[i + 3] == "}" && if_else[i + 2] == "{")
+		{
+			key_level_vec.push_back({"else if", flag});
+		}
+		if (if_else[i] == "else" && if_else[i + 1] == "if" && if_else[i + 3] != "}" && if_else[i - 1] != "if")
+		{
+			key_level_vec.push_back({"else if", flag});
+			flag++;
+		}
+	}
+
+	for (int i = 0; i < key_level_vec.size(); i++)
+	{
+		if (key_level_vec[i].first == "if")
+		{
+			for (int j = i; j < key_level_vec.size(); j++)
+			{
+				if (key_level_vec[j].first == "else if")
+				{
+					break;
+				}
+
+				if (key_level_vec[j].first == "else" && key_level_vec[i].second == key_level_vec[j].second)
+				{
+					num++;
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < key_level_vec.size(); i++)
+	{
+		cout << key_level_vec[i].first << " " << key_level_vec[i].second << endl;
+	}
+
+	return num;
+}
+
+/*
+Print the number of if-else statement.
+*/
+// int countIfElse(vector<string> &code)
+// {
+// 	int num = 0;
+// 	deque<string> if_else = extractIfElse(code);
+// 	// for (int i = 0; i < if_else.size(); i++)
+// 	// {
+// 	// 	cout << if_else[i] << endl;
+// 	// }
+// 	for (int i = 0; i < if_else.size(); i++)
+// 	{
+// 		if (if_else[i] == "if")
+// 		{
+// 			//Start to count if-else
+// 			if (i == 0)
+// 			{
+// 				bool flag =
+// 					(if_else[i + 1] == "{") && (if_else[i + 2] == "}") && (if_else[i + 3] == "else") && (if_else[i + 4] == "{") && (if_else[i + 5] == "}");
+// 				if (flag)
+// 				{
+// 					num++;
+// 				}
+// 			}
+// 			else
+// 			{
+// 				bool flag =
+// 					(if_else[i - 1] != "else") && (if_else[i + 1] == "{") && (if_else[i + 2] == "}") && (if_else[i + 3] == "else") && (if_else[i + 4] == "{") && (if_else[i + 5] == "}");
+// 				if (flag)
+// 				{
+// 					num++;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	return num;
+// }
+
 void read(string &path, int &level)
 {
 	// cout << "Please type in the path if code file: ";
@@ -129,6 +265,7 @@ void solve(vector<string> &code, int &level)
 		break;
 	case 3:
 		cout << "Case 3" << endl;
+		cout << "if-else num: " << countIfElse(code) << endl;
 		break;
 	case 4:
 		cout << "Case 4" << endl;
@@ -151,6 +288,7 @@ int main()
 	// 	cout << code[i] << endl;
 	// }
 	solve(code, level);
+	//countIfElse(code);
 	system("pause");
 	return 0;
 }
