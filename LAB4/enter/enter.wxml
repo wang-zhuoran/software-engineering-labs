@@ -1,0 +1,13 @@
+<view class="container">
+    <image class="backgroundGraph" src="Component3.png"></image>
+    <!---->
+
+    <image class="addRoom" src="AddRoom.png" catchtap="toSingleGame"></image>
+    <image class="createRoom" src="CreatRoom.png" catchtap="toCreateRoom"></image>
+
+</view>
+<!--底下三个选项-->
+<view>
+    <bottomIcon>
+    </bottomIcon>
+</view>

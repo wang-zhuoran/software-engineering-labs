@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "bottomIcon":"/components/bottomIcon/bottomIcon",
+    "checkRule":"/components/rule/rule"
+  }
+}
