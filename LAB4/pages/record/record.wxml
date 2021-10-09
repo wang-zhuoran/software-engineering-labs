@@ -1,0 +1,5 @@
+<!--pages/record/record.wxml-->
+<view class="container">
+    <image class="backgroundGraph" src="Dice_background.png"></image>
+    <image class="record" src="record.png"></image>
+</view>

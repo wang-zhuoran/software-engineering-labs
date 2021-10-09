@@ -1,0 +1,16 @@
+/* pages/record/record.wxss */
+.container {
+  background: #e3edf7;
+}
+
+.backgroundGraph {
+  width: 610rpx;
+  height: 1200rpx;
+  top: 10%;
+}
+.record {
+  position: absolute;
+  top: 0rpx;
+  width: 100%;
+  height: 100%;
+}
