@@ -1,0 +1,28 @@
+/* components/bottomIcon/bottomIcon.wxss */
+.bottomIcon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;   
+    justify-content: space-evenly;
+    position: absolute;
+    bottom: 0;
+    top:80%;
+    width: 100%;
+    background:#E3EDF7;
+}
+.record{
+    display: flex;
+    width: 200rpx;
+    height: 200rpx;  
+    
+  }
+.setup{
+  width: 200rpx;
+  height:200rpx;  
+  display: flex;
+}
+.help{
+  width: 200rpx;
+  height:190rpx; 
+  display: flex; 
+}

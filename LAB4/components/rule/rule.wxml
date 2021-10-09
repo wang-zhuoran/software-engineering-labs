@@ -1,0 +1,4 @@
+<!--pages/rule/rule.wxml-->
+<view class="ruleIcon">
+    <image src="rule.png"></image>
+</view>

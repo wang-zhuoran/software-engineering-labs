@@ -1,0 +1,6 @@
+<!--components/bottomIcon/bottomIcon.wxml-->
+<view class="bottomIcon">
+    <image class="record" catchtap="toRecord" src="record.png"></image>
+    <image class="setup" catchtap="toSetup" src="setup.png"></image>
+    <image class="help" catchtap="toHelp" src="help.png"></image>
+</view>
