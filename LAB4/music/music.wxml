@@ -1,0 +1,9 @@
+<!--pages/music/music.wxml-->
+
+<view class="container">
+    <text bold="true">音乐设置</text>
+
+    <button class="button1" bindtap="start">播放</button>
+    <button class="button2" bindtap="pause">暂停</button>
+
+</view>

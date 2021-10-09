@@ -1,0 +1,12 @@
+/* pages/music/music.wxss */
+.container{
+  background: #E3EDF7;
+}
+
+.button1{
+  margin-top:10%;
+}
+.backgroundGraph{
+  width: 380px;
+  height: 612px;
+}
