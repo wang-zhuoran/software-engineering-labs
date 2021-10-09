@@ -1,0 +1,75 @@
+/* pages/singleGame/singleGame.wxss */
+
+.gameBackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.bowl {
+  position: absolute;
+  top: 37%;
+}
+
+.startGame {
+  top: 85%;
+}
+
+.img1 {
+  position: absolute;
+  top: 33%;
+  left: 15%;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.img2 {
+  position: absolute;
+  top: 35%;
+  left: 55%;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.img3 {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.img4 {
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  width: 50rpx;
+  height: 50rpx;
+}
+.img5 {
+  position: absolute;
+  top: 45%;
+  left: 25%;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.img6 {
+  position: absolute;
+  top: 60%;
+  left: 45%;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.playDice {
+  position: absolute;
+  top: 0%;
+  left: 16%;
+  width: 250rpx;
+  height: 250rpx;
+}
+
+.rank {
+  position: absolute;
+  top: 15%;
+}

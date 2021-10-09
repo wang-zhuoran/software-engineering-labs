@@ -1,0 +1,23 @@
+<!--pages/singleGame/singleGame.wxml-->
+<view class="container">
+    <image class="gameBackground" src="GameBackground.png"></image>
+    <button class='rank' type="default">
+        <text>{{rank}}</text>
+    </button>
+    <button class="startGame" type="primary" bindtap="click">Start</button>
+    <image class="bowl" src="bowl.jpg">
+        <image class='playDice' src="{{img}}"></image>
+        <image class='img1' src="{{dicelist[0]}}"></image>
+        <image class='img2' src="{{dicelist[1]}}"></image>
+        <image class='img3' src="{{dicelist[2]}}"></image>
+        <image class='img4' src="{{dicelist[3]}}"></image>
+        <image class='img5' src="{{dicelist[4]}}"></image>
+        <image class='img6' src="{{dicelist[5]}}"></image>
+
+    </image>
+
+
+</view>
+
+
+<!-- <bottomIcon/> -->
