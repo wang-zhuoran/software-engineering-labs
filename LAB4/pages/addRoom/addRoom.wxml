@@ -1,0 +1,414 @@
+<!--pages/addRoom/addRoom.wxml-->
+<view class="container" wx:if="{{statu==0}}">
+
+
+    <!-- 定义背景 -->
+    <image class="backgroundGraph" src="Dice_background.png">
+    </image>
+
+
+    <!-- 选择人数和输入房间名称 -->
+    <other-widget class="other-widget">
+        <view class='input_ID'>
+            <input class="input" name="roomID" placeholder-style="font-size:15px" placeholder="请输入房间名称"
+                bindinput="bindKeyInput" />
+        </view>
+
+        <view class='tishi'>{{infoMess}}</view>
+
+        <view class='top'>
+            <view class='top-selected' bindtap='bindShowMsg'>
+                <text>{{num}}</text>
+
+            </view>
+            <!-- 下拉需要显示的列表 -->
+            <view class="select_box" wx:if="{{select}}">
+                <view wx:for="{{nums}}" wx:key="unique">
+                    <view class="select_one" bindtap="mySelect" data-name="{{item}}">{{item}}</view>
+                </view>
+            </view>
+        </view>
+        <button class='in' bindtap="click" type="primary">确定</button>
+    </other-widget> <!-- other widget希望是放在背景图片之上的 -->
+</view>
+
+
+<!-- 下面进入多人游戏模式 -->
+<view class="container2" wx:if="{{statu!=0}}">
+
+    <!-- 定义背景 -->
+    <image class="gameBackgroundGraph" src="GameBackground.png"></image>
+
+    <other-widget class="other-widget">
+        <view class="result_title">房间ID：{{roomID}}</view>
+
+        <!--两人房间-->
+        <view class='twoPeople' wx:if="{{num=='2人'}}">
+            <view wx:if="{{p==1}}">
+                <view class='start' wx:if="{{statu==1}}">
+                    <image class='p21' src="p2.jpg">
+                        <text class='p21text'>{{userName[0]}}</text>
+                    </image>
+                    <image class='p22' src="p1.jpg">
+                        <text class='p22text'>{{userName[1]}}</text>
+                    </image>
+
+                    <button class='press' bindtap='click1'>请玩家{{userName[p-1]}}点击投掷</button>
+                </view>
+                <view class='shake' wx:if="{{statu==2}}">
+
+                    <image class='playDice' src="playDice.gif"></image>
+                    <button class='press' bindtap='click2'>点击停止投掷</button>
+                </view>
+                <view class='result' wx:if="{{statu==3}}">
+
+                    <image class='img1' src="{{dicelist[0]}}"></image>
+                    <image class='img2' src="{{dicelist[1]}}"></image>
+                    <image class='img3' src="{{dicelist[2]}}"></image>
+                    <image class='img4' src="{{dicelist[3]}}"></image>
+                    <image class='img5' src="{{dicelist[4]}}"></image>
+                    <image class='img6' src="{{dicelist[5]}}"></image>
+                    <view class='rank'>{{rank}}</view>
+                    <button class='press' bindtap='next2'>点击轮到下一位</button>
+                </view>
+            </view>
+            <view wx:if="{{p==2}}">
+                <view class='start' wx:if="{{statu==1}}">
+                    <image class='p21' src="p2.jpg">
+                        <text class='p21text'>{{userName[0]}}</text>
+                    </image>
+                    <image class='p22' src="p1.jpg">
+                        <text class='p22text'>{{userName[1]}}</text>
+                    </image>
+
+                    <button class='press' bindtap='click1'>请玩家 {{userName[p-1]}} 点击投掷</button>
+                </view>
+                <view class='shake' wx:if="{{statu==2}}">
+
+                    <image class='playDice' src="playDice.gif"></image>
+                    <button class='press' bindtap='click2'>点击停止投掷</button>
+                </view>
+                <view class='result' wx:if="{{statu==3}}">
+
+                    <image class='img1' src="{{dicelist[0]}}"></image>
+                    <image class='img2' src="{{dicelist[1]}}"></image>
+                    <image class='img3' src="{{dicelist[2]}}"></image>
+                    <image class='img4' src="{{dicelist[3]}}"></image>
+                    <image class='img5' src="{{dicelist[4]}}"></image>
+                    <image class='img6' src="{{dicelist[5]}}"></image>
+                    <view class='rank'>{{rank}}</view>
+                    <button class='press' bindtap='finish'>点击生成游戏结果</button>
+                </view>
+            </view>
+            <view class='finallyRank' wx:if="{{p==0}}">
+                <view class='ranktitle'>
+                    <text class='title1'>用户</text>
+                    <text class='title2'>结果</text>
+                    <text class='title3'>积分</text>
+                </view>
+                <view>
+                    <text class='name_1'>{{userName[0]}}</text>
+                    <text class='rank_1'>{{rank1}}</text>
+                    <text class='score_1'>{{score1}}</text>
+                    <text class='name_2'>{{userName[1]}}</text>
+                    <text class='rank_2'>{{rank2}}</text>
+                    <text class='score_2'>{{score2}}</text>
+                </view>
+                <navigator url="/pages/addRoom/addRoom">
+                    <view class="Again">点击重来>></view>
+                </navigator>
+                <view class='Goto' bindtap='toFirstPage'>点击跳转首页>></view>
+            </view>
+        </view>
+
+
+        <!-- 三人房间 -->
+        <view class='threePeople' wx:if="{{num=='3人'}}">
+            <view wx:if="{{p==1}}">
+                <view class='start' wx:if="{{statu==1}}">
+                    <image class='p31' src="p2.jpg">
+                        <text class='p31text'>{{userName[0]}}</text>
+                    </image>
+                    <image class='p32' src="p1.jpg">
+                        <text class='p32text'>{{userName[1]}}</text>
+                    </image>
+                    <image class='p33' src="p3.jpg">
+                        <text class='p33text'>{{userName[2]}}</text>
+                    </image>
+
+
+                    <button class='press' bindtap='click1'>请玩家{{userName[p-1]}}点击投掷</button>
+                </view>
+                <view class='shake' wx:if="{{statu==2}}">
+
+                    <image class='playDice' src="playDice.gif"></image>
+                    <button class='press' bindtap='click2'>点击停止投掷</button>
+                </view>
+                <view class='result' wx:if="{{statu==3}}">
+
+                    <image class='img1' src="{{dicelist[0]}}"></image>
+                    <image class='img2' src="{{dicelist[1]}}"></image>
+                    <image class='img3' src="{{dicelist[2]}}"></image>
+                    <image class='img4' src="{{dicelist[3]}}"></image>
+                    <image class='img5' src="{{dicelist[4]}}"></image>
+                    <image class='img6' src="{{dicelist[5]}}"></image>
+                    <view class='rank'>{{rank}}</view>
+                    <button class='press' bindtap='next2'>点击轮到下一位</button>
+                </view>
+            </view>
+
+            <view wx:if="{{p==2}}">
+                <view class='start' wx:if="{{statu==1}}">
+                    <image class='p31' src="p2.jpg">
+                        <text class='p31text'>{{userName[0]}}</text>
+                    </image>
+                    <image class='p32' src="p1.jpg">
+                        <text class='p32text'>{{userName[1]}}</text>
+                    </image>
+                    <image class='p33' src="p3.jpg">
+                        <text class='p33text'>{{userName[2]}}</text>
+                    </image>
+
+                    <button class='press' bindtap='click1'>请玩家 {{userName[p-1]}} 点击投掷</button>
+                </view>
+                <view class='shake' wx:if="{{statu==2}}">
+
+                    <image class='playDice' src="playDice.gif"></image>
+                    <button class='press' bindtap='click2'>点击停止投掷</button>
+                </view>
+                <view class='result' wx:if="{{statu==3}}">
+
+                    <image class='img1' src="{{dicelist[0]}}"></image>
+                    <image class='img2' src="{{dicelist[1]}}"></image>
+                    <image class='img3' src="{{dicelist[2]}}"></image>
+                    <image class='img4' src="{{dicelist[3]}}"></image>
+                    <image class='img5' src="{{dicelist[4]}}"></image>
+                    <image class='img6' src="{{dicelist[5]}}"></image>
+                    <view class='rank'>{{rank}}</view>
+                    <button class='press' bindtap='next3'>点击轮到下一位</button>
+                </view>
+            </view>
+            <view wx:if="{{p==3}}">
+                <view class='start' wx:if="{{statu==1}}">
+                    <image class='p31' src="p2.jpg">
+                        <text class='p31text'>{{userName[0]}}</text>
+                    </image>
+                    <image class='p32' src="p1.jpg">
+                        <text class='p32text'>{{userName[1]}}</text>
+                    </image>
+                    <image class='p33' src="p3.jpg">
+                        <text class='p33text'>{{userName[2]}}</text>
+                    </image>
+
+                    <button class='press' bindtap='click1'>请玩家 {{userName[p-1]}} 点击投掷</button>
+                </view>
+                <view class='shake' wx:if="{{statu==2}}">
+
+                    <image class='playDice' src="playDice.gif"></image>
+                    <button class='press' bindtap='click2'>点击停止投掷</button>
+                </view>
+                <view class='result' wx:if="{{statu==3}}">
+
+                    <image class='img1' src="{{dicelist[0]}}"></image>
+                    <image class='img2' src="{{dicelist[1]}}"></image>
+                    <image class='img3' src="{{dicelist[2]}}"></image>
+                    <image class='img4' src="{{dicelist[3]}}"></image>
+                    <image class='img5' src="{{dicelist[4]}}"></image>
+                    <image class='img6' src="{{dicelist[5]}}"></image>
+                    <view class='rank'>{{rank}}</view>
+                    <button class='press' bindtap='finish'>点击生成游戏结果</button>
+                </view>
+            </view>
+            <view class='finallyRank' wx:if="{{p==0}}">
+                <view class='ranktitle'>
+                    <text class='title1'>用户</text>
+                    <text class='title2'>结果</text>
+                    <text class='title3'>积分</text>
+                </view>
+                <view>
+                    <text class='name_1'>{{userName[0]}}</text>
+                    <text class='rank_1'>{{rank1}}</text>
+                    <text class='score_1'>{{score1}}</text>
+                    <text class='name_2'>{{userName[1]}}</text>
+                    <text class='rank_2'>{{rank2}}</text>
+                    <text class='score_2'>{{score2}}</text>
+                    <text class='name_3'>{{userName[2]}}</text>
+                    <text class='rank_3'>{{rank3}}</text>
+                    <text class='score_3'>{{score3}}</text>
+                </view>
+                <navigator url="/pages/addRoom/addRoom">
+                    <view class="Again">点击重来>></view>
+                </navigator>
+                <view class='Goto' bindtap='toFirstPage'>点击跳转首页>></view>
+            </view>
+        </view>
+
+        <!--四人房间-->
+        <view class='fourPeople' wx:if="{{num=='4人'}}">
+            <view wx:if="{{p==1}}">
+                <view class='start' wx:if="{{statu==1}}">
+                    <image class='p41' src="p2.jpg">
+                        <text class='p41text'>{{userName[0]}}</text>
+                    </image>
+                    <image class='p42' src="p1.jpg">
+                        <text class='p42text'>{{userName[1]}}</text>
+                    </image>
+                    <image class='p43' src="p3.jpg">
+                        <text class='p43text'>{{userName[2]}}</text>
+                    </image>
+                    <image class='p44' src="p4.jpg">
+                        <text class='p44text'>{{userName[2]}}</text>
+                    </image>
+
+                    <button class='press' bindtap='click1'>请玩家{{userName[p-1]}}点击投掷</button>
+                </view>
+                <view class='shake' wx:if="{{statu==2}}">
+
+                    <image class='playDice' src="playDice.gif"></image>
+                    <button class='press' bindtap='click2'>点击停止投掷</button>
+                </view>
+                <view class='result' wx:if="{{statu==3}}">
+
+                    <image class='img1' src="{{dicelist[0]}}"></image>
+                    <image class='img2' src="{{dicelist[1]}}"></image>
+                    <image class='img3' src="{{dicelist[2]}}"></image>
+                    <image class='img4' src="{{dicelist[3]}}"></image>
+                    <image class='img5' src="{{dicelist[4]}}"></image>
+                    <image class='img6' src="{{dicelist[5]}}"></image>
+                    <view class='rank'>{{rank}}</view>
+                    <button class='press' bindtap='next2'>点击轮到下一位</button>
+                </view>
+            </view>
+            <view wx:if="{{p==2}}">
+                <view class='start' wx:if="{{statu==1}}">
+                    <image class='p41' src="p2.jpg">
+                        <text class='p41text'>{{userName[0]}}</text>
+                    </image>
+                    <image class='p42' src="p1.jpg">
+                        <text class='p42text'>{{userName[1]}}</text>
+                    </image>
+                    <image class='p43' src="p3.jpg">
+                        <text class='p43text'>{{userName[2]}}</text>
+                    </image>
+                    <image class='p44' src="p4.jpg">
+                        <text class='p44text'>{{userName[2]}}</text>
+                    </image>
+
+                    <button class='press' bindtap='click1'>请玩家 {{userName[p-1]}} 点击投掷</button>
+                </view>
+                <view class='shake' wx:if="{{statu==2}}">
+
+                    <image class='playDice' src="playDice.gif"></image>
+                    <button class='press' bindtap='click2'>点击停止投掷</button>
+                </view>
+                <view class='result' wx:if="{{statu==3}}">
+
+                    <image class='img1' src="{{dicelist[0]}}"></image>
+                    <image class='img2' src="{{dicelist[1]}}"></image>
+                    <image class='img3' src="{{dicelist[2]}}"></image>
+                    <image class='img4' src="{{dicelist[3]}}"></image>
+                    <image class='img5' src="{{dicelist[4]}}"></image>
+                    <image class='img6' src="{{dicelist[5]}}"></image>
+                    <view class='rank'>{{rank}}</view>
+                    <button class='press' bindtap='next3'>点击轮到下一位</button>
+                </view>
+            </view>
+            <view wx:if="{{p==3}}">
+                <view class='start' wx:if="{{statu==1}}">
+                    <image class='p41' src="p2.jpg">
+                        <text class='p41text'>{{userName[0]}}</text>
+                    </image>
+                    <image class='p42' src="p1.jpg">
+                        <text class='p42text'>{{userName[1]}}</text>
+                    </image>
+                    <image class='p43' src="p3.jpg">
+                        <text class='p43text'>{{userName[2]}}</text>
+                    </image>
+                    <image class='p44' src="p4.jpg">
+                        <text class='p44text'>{{userName[2]}}</text>
+                    </image>
+
+                    <button class='press' bindtap='click1'>请玩家 {{userName[p-1]}} 点击投掷</button>
+                </view>
+                <view class='shake' wx:if="{{statu==2}}">
+
+                    <image class='playDice' src="playDice.gif"></image>
+                    <button class='press' bindtap='click2'>点击停止投掷</button>
+                </view>
+                <view class='result' wx:if="{{statu==3}}">
+
+                    <image class='img1' src="{{dicelist[0]}}"></image>
+                    <image class='img2' src="{{dicelist[1]}}"></image>
+                    <image class='img3' src="{{dicelist[2]}}"></image>
+                    <image class='img4' src="{{dicelist[3]}}"></image>
+                    <image class='img5' src="{{dicelist[4]}}"></image>
+                    <image class='img6' src="{{dicelist[5]}}"></image>
+                    <view class='rank'>{{rank}}</view>
+                    <button class='press' bindtap='next4'>点击轮到下一位</button>
+                </view>
+            </view>
+            <view wx:if="{{p==4}}">
+                <view class='start' wx:if="{{statu==1}}">
+                    <image class='p41' src="p2.jpg">
+                        <text class='p41text'>{{userName[0]}}</text>
+                    </image>
+                    <image class='p42' src="p1.jpg">
+                        <text class='p42text'>{{userName[1]}}</text>
+                    </image>
+                    <image class='p43' src="p3.jpg">
+                        <text class='p43text'>{{userName[2]}}</text>
+                    </image>
+                    <image class='p44' src="p4.jpg">
+                        <text class='p44text'>{{userName[3]}}</text>
+                    </image>
+
+                    <button class='press' bindtap='click1'>请玩家 {{userName[p-1]}} 点击投掷</button>
+                </view>
+                <view class='shake' wx:if="{{statu==2}}">
+
+                    <image class='playDice' src="playDice.gif"></image>
+                    <button class='press' bindtap='click2'>点击停止投掷</button>
+                </view>
+                <view class='result' wx:if="{{statu==3}}">
+
+                    <image class='img1' src="{{dicelist[0]}}"></image>
+                    <image class='img2' src="{{dicelist[1]}}"></image>
+                    <image class='img3' src="{{dicelist[2]}}"></image>
+                    <image class='img4' src="{{dicelist[3]}}"></image>
+                    <image class='img5' src="{{dicelist[4]}}"></image>
+                    <image class='img6' src="{{dicelist[5]}}"></image>
+                    <view class='rank'>{{rank}}</view>
+                    <button class='press' bindtap='finish'>点击生成游戏结果</button>
+                </view>
+            </view>
+            <view class='finallyRank' wx:if="{{p==0}}">
+                <view class='ranktitle'>
+                    <text class='title1'>用户</text>
+                    <text class='title2'>结果</text>
+                    <text class='title3'>积分</text>
+                </view>
+                <view>
+                    <text class='name_1'>{{userName[0]}}</text>
+                    <text class='rank_1'>{{rank1}}</text>
+                    <text class='score_1'>{{score1}}</text>
+                    <text class='name_2'>{{userName[1]}}</text>
+                    <text class='rank_2'>{{rank2}}</text>
+                    <text class='score_2'>{{score2}}</text>
+                    <text class='name_3'>{{userName[2]}}</text>
+                    <text class='rank_3'>{{rank3}}</text>
+                    <text class='score_3'>{{score3}}</text>
+                    <text class='name_4'>{{userName[3]}}</text>
+                    <text class='rank_4'>{{rank4}}</text>
+                    <text class='score_4'>{{score4}}</text>
+                </view>
+                <navigator url="/pages/addRoom/addRoom">
+                    <view class="Again">点击重来>></view>
+                </navigator>
+                <view class='Goto' bindtap='toFirstPage'>点击跳转首页>></view>
+            </view>
+        </view>
+
+
+    </other-widget>
+
+</view>
