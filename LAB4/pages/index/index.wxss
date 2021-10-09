@@ -1,0 +1,19 @@
+/**index.wxss**/
+.container {
+  background: #e3edf7;
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.3);
+}
+.background_graph {
+  margin-top: 20%;
+  margin-right: 10%;
+  width: 1000rpx;
+  height: 1000rpx;
+}
+
+.login_button {
+  position: absolute;
+  width: 500rpx;
+  height: 250rpx;
+  left: 18%;
+  top: 65%;
+}

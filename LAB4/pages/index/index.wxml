@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="container">
+    <image class="background_graph" src="LoginBackground.png">
+    </image>
+
+
+    <view>
+        <navigator url="/pages/enter/enter">
+            <image class=" login_button" src="LoginButton.png">
+            </image>
+        </navigator>
+    </view>
+</view>
