@@ -1,9 +1,10 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <iomanip>
+#include <math.h>
 #include <set>
-#include <limits.h>
-#include <stdlib.h>
+using namespace std;
 
 
 int extractGrade(string &grade)
@@ -108,7 +109,7 @@ void solve(string &garde, int &num_questions)
     int ans;
     for (int i = 0; i < num_questions; i++)
     {
-        ans = generateEquation(grade_num);
+        ans = floor(grade_num * 100.0f + 0.5) / 100.0f;
         int input;
         cin >> input;
         if (ans == input)
@@ -122,7 +123,7 @@ void solve(string &garde, int &num_questions)
     }
     else
     {
-        cout << "end! Wrong question, your score is " << (num_correct * 0.1 / num_question) * 100 << endl;
+        cout << "end! Wrong question, your score is " << (num_correct * 1 / num_question) * 100 << endl;
     }
 }
 
@@ -134,6 +135,10 @@ int main()
     string grade;
 
     read(grade, num_questions);
+    
+    solve(grade, num_questions);
+
+    system("pause");
 
     return 0;
 }
