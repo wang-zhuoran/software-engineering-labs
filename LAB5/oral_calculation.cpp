@@ -102,14 +102,14 @@ void read(string &grade, int &num_questions)
     cin >> num_questions;
 }
 
-void solve(string &garde, int &num_questions)
+void solve(string &grade, int &num_questions)
 {
     int grade_num = extractGrade(grade);
     int num_correct = 0;
     int ans;
     for (int i = 0; i < num_questions; i++)
     {
-        ans = floor(grade_num * 100.0f + 0.5) / 100.0f;
+        ans = floor(generateEquation(grade_num) * 100.0f + 0.5) / 100.0f;
         int input;
         cin >> input;
         if (ans == input)
@@ -123,7 +123,7 @@ void solve(string &garde, int &num_questions)
     }
     else
     {
-        cout << "end! Wrong question, your score is " << (num_correct * 1 / num_question) * 100 << endl;
+        cout << "end! Wrong question, your score is " << (num_correct * 1 / num_questions) * 100 << endl;
     }
 }
 
