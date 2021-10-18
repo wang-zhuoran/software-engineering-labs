@@ -29,11 +29,11 @@ double generateEquation(int grade)
         randomOperationIndex = (rand() % 2);
         switch (randomOperationIndex) {
         case 0:
-            printf("%d + %d = ?", num1, num2);
+            printf("%d + %d = ?\n", num1, num2);
             ans = num1 + num2;
             break;
         case 1:
-            printf("%d - %d = ?", num1, num2);
+            printf("%d - %d = ?\n", num1, num2);
             ans = num1 - num2;
             break;
         }
@@ -45,19 +45,19 @@ double generateEquation(int grade)
         randomOperationIndex = (rand() % 4);
         switch (randomOperationIndex) {
         case 0:
-            printf("%d+%d = ?", num1, num2);
+            printf("%d+%d = ?\n", num1, num2);
             ans = num1 + num2;
             break;
         case 1:
-            printf("%d-%d = ?", num1, num2);
+            printf("%d-%d = ?\n", num1, num2);
             ans = num1 - num2;
             break;
         case 2:
-            printf("%d*%d = ?", num1, num2);
+            printf("%d*%d = ?\n", num1, num2);
             ans = num1 * num2;
             break;
         case 3:
-            printf("%d/%d = ?", num1, num2);
+            printf("%d/%d = ?\n", num1, num2);
             ans = num1 / num2;
             break;
         }
@@ -69,19 +69,19 @@ double generateEquation(int grade)
         randomOperationIndex = (rand() % 4);
         switch (randomOperationIndex) {
         case 0:
-            printf("%lf+%lf = ?", num1, num2);
+            printf("%lf+%lf = ?\n", num1, num2);
             ans = num1 + num2;
             break;
         case 1:
-            printf("%lf-%lf = ?", num1, num2);
+            printf("%lf-%lf = ?\n", num1, num2);
             ans = num1 - num2;
             break;
         case 2:
-            printf("%lf*%lf = ?", num1, num2);
+            printf("%lf*%lf = ?\n", num1, num2);
             ans = num1 * num2;
             break;
         case 3:
-            printf("%lf/%lf = ?", num1, num2);
+            printf("%lf/%lf = ?\n", num1, num2);
             ans = num1 / num2;
             break;
         }
