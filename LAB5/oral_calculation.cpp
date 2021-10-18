@@ -91,7 +91,11 @@ double generateEquation(int grade)
 
 void read(string &grade, int &num_questions)
 {
-
+    cout << "Please enter your grade?" << endl;
+    cin >> grade >> grade;
+    //puts("");
+    cout << "Please enter the number of questions?" << endl;
+    cin >> num_questions;
 }
 
 void solve(string &garde, int &num_questions)
